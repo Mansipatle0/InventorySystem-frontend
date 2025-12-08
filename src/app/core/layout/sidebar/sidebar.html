@@ -1,0 +1,55 @@
+<div class="sidebar-backdrop"
+     [class.show]="sidebarOpen"
+     (click)="closeSidebar()">
+</div>
+
+<aside class="sidebar" [class.open]="sidebarOpen">
+
+  <div class="logo-area">
+    <div class="logo-circle">SI</div>
+    <div>
+      <h2>SmartInventory</h2>
+      <p class="role-badge">{{ role }} Panel</p>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <span class="hello">Hello,</span>
+    <span class="name">{{ userName }}</span>
+  </div>
+
+  <nav class="sidebar-nav">
+
+    <!-- ⭐ ADMIN LINKS -->
+    @if (role === 'ADMIN') {
+      <a routerLink="overview" routerLinkActive="active" class="nav-item">📊 Overview</a>
+      <a routerLink="products" routerLinkActive="active" class="nav-item">📦 Products & Catalog</a>
+      <a routerLink="stock" routerLinkActive="active" class="nav-item">🧮 Stock & Adjustments</a>
+      <a routerLink="users" routerLinkActive="active" class="nav-item">👥 Users & Role</a>
+      <a routerLink="reports" routerLinkActive="active" class="nav-item">📑 Reports</a>
+      <a routerLink="settings" routerLinkActive="active" class="nav-item">⚙️ Settings</a>
+    }
+
+    <!-- ⭐ CASHIER LINKS -->
+    @if (role === 'CASHIER') {
+      <a routerLink="pos" routerLinkActive="active" class="nav-item">🧾 POS</a>
+      <a routerLink="hold-bill" routerLinkActive="active" class="nav-item">⏸️ Hold Bill</a>
+      <a routerLink="recall-bill" routerLinkActive="active" class="nav-item">🔄 Recall Bill</a>
+      <a routerLink="invoice" routerLinkActive="active" class="nav-item">🧾 Invoices</a>
+    }
+
+    <!-- ⭐ VIEWER LINKS -->
+    @if (role === 'VIEWER') {
+      <a routerLink="/viewer" routerLinkActive="active" class="nav-item">📊 Reports & Overview</a>
+      <a routerLink="daily" routerLinkActive="active" class="nav-item">📅 Daily Sales</a>
+      <a routerLink="product" routerLinkActive="active" class="nav-item">🧾 Product History</a>
+      <a routerLink="monthly" routerLinkActive="active" class="nav-item">📈 Monthly Sales</a>
+      <a routerLink="fast-slow" routerLinkActive="active" class="nav-item">⚡ Fast/Slow Movers</a>
+      <a routerLink="export" routerLinkActive="active" class="nav-item">📤 Yearly Export (Excel)</a>
+    }
+
+  </nav>
+
+  <button class="logout-btn" (click)="logout()">🚪 Logout</button>
+
+</aside>

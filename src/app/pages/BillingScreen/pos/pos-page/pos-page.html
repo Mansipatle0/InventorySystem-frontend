@@ -1,0 +1,114 @@
+<div class="pos-wrapper">
+  <section class="left-side">
+    <div class="scan-panel">
+      <label for="barcodeInput">Scan Barcode</label>
+      <input
+        #barcodeInput
+        id="barcodeInput"
+        type="text"
+        placeholder="Keep cursor here and scan product barcode"
+        (keyup.enter)="onBarcodeEnter(barcodeInput.value)"
+      />
+      <small>
+        Tip: Wireless scanner will type the barcode and press Enter automatically.
+      </small>
+    </div>
+
+    <div class="cart-panel">
+      <div class="panel-header">
+        <h2>Cart</h2>
+
+        @if (cartItems.length) {
+          <span>Items: {{ cartItems.length }}</span>
+        }
+      </div>
+
+      @if (cartItems.length) {
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Product</th>
+              <th>Barcode</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of cartItems; track item.barcode; let i = $index) {
+              <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.barcode }}</td>
+                <td>{{ item.unitPrice | currency:'INR' }}</td>
+                <td>
+                  <input
+                    type="number"
+                    min="1"
+                    [value]="item.quantity"
+                    (change)="onQuantityChange(item, $event)"
+                  />
+                </td>
+                <td>{{ item.lineTotal | currency:'INR' }}</td>
+                <td>
+                  <button class="btn-icon" (click)="removeItem(item)">✕</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      } @else {
+        <div class="empty-state">
+          Cart is empty. Scan a barcode to add products.
+        </div>
+      }
+    </div>
+  </section>
+
+  <aside class="right-side">
+    <div class="summary-panel">
+      <h2>Bill Summary</h2>
+
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <strong>{{ subtotal | currency:'INR' }}</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Tax ({{ taxPercent }}%)</span>
+        <span>{{ taxAmount | currency:'INR' }}</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Discount</span>
+        <input
+          type="number"
+          min="0"
+          [value]="discountAmount"
+          (change)="onDiscountChange($event)"
+        />
+      </div>
+
+      <div class="summary-row grand">
+        <span>Grand Total</span>
+        <strong>{{ grandTotal | currency:'INR' }}</strong>
+      </div>
+
+      <div class="actions">
+        <button class="btn-secondary" (click)="clearCart()">Clear Cart</button>
+        <button class="btn-primary" (click)="completeSale()">Complete Sale</button>
+      </div>
+    </div>
+
+    <div class="info-panel">
+      <h3>POS Info</h3>
+      <ul>
+        <li>Each scan adds/increases product in the cart.</li>
+        <li>Stock updates only after final sale in backend.</li>
+        <li>Design is generic for any shop category.</li>
+      </ul>
+    </div>
+  </aside>
+</div>

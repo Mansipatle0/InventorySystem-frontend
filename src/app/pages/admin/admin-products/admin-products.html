@@ -1,0 +1,90 @@
+<div class="section-header">
+  <div>
+    <h2>Products & Catalog</h2>
+    <p class="section-desc">
+      Add, edit and bulk import products with barcode, price and category.
+    </p>
+  </div>
+
+  <div class="actions">
+    <button class="btn-light" (click)="onBulkImport()">Bulk Import</button>
+    <button class="btn-primary" (click)="onAddProduct()">+ Add Product</button>
+  </div>
+</div>
+
+<div class="filters-row">
+  <div class="filter">
+    <label>Search</label>
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      placeholder="Code / name / category"
+    />
+  </div>
+
+  <div class="info-chip">
+    Products in list: <strong>{{ filteredRows.length }}</strong>
+  </div>
+</div>
+
+<div class="table-scroll">
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Product</th>
+          <th>Category</th>
+          <th class="num">MRP</th>
+          <th class="num">Selling</th>
+          <th>Status</th>
+          <th class="num">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @if (filteredRows.length === 0) {
+          <tr>
+            <td colspan="7" class="empty-state">
+              No products found. Use "Add Product" to create new items.
+            </td>
+          </tr>
+        } @else {
+
+          @for (row of filteredRows; track row.id) {
+            <tr>
+
+              <td data-label="Code">{{ row.skuCode }}</td>
+
+              <td data-label="Product">{{ row.name }}</td>
+
+              <td data-label="Category">{{ row.category }}</td>
+
+              <td data-label="MRP" class="num">{{ row.mrp | number : '1.0-2' }}</td>
+
+              <td data-label="Selling" class="num">{{ row.sellingPrice | number : '1.0-2' }}</td>
+
+              <td data-label="Status">
+                <span
+                  class="status-pill"
+                  [class.active]="row.active"
+                  [class.inactive]="!row.active"
+                >
+                  {{ row.active ? 'ACTIVE' : 'INACTIVE' }}
+                </span>
+              </td>
+
+              <td class="num">
+                <button class="link-btn" (click)="onEdit(row)">Edit</button>
+                <button class="link-btn" (click)="onToggleStatus(row)">
+                  {{ row.active ? 'Deactivate' : 'Activate' }}
+                </button>
+              </td>
+
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-width: 600px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.field label {
+  font-size: 0.8rem;
+  color: #0a0a0a;
+}
+
+.field input,
+.field textarea {
+  border-radius: 0.6rem;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: #e4e5e9;
+  color: #0a0a0a;
+     padding: 0.8rem 1.1em;
+  font-size: 0.85rem;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+.btn-primary{
+  padding: 10px;
+ border: 1px solid rgba(148, 163, 184, 0.7);
+ 
+    border-radius: 0.6rem;
+   
+   
+    font-weight: bold;
+    cursor: pointer;
+ background: #16a34a;
+  color: white;
+  font-weight: 600;
+    
+}
+.btn-primary:hover{
+  background: #095e28;
+    transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(16, 185, 129, 0.3);
+ 
+}

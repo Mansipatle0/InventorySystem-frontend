@@ -1,0 +1,39 @@
+<div class="cashier-shell">
+
+
+  <div
+    class="sidebar-backdrop"
+    [class.show]="sidebarOpen"
+    (click)="closeSidebar()">
+  </div>
+
+
+  <app-sidebar
+    [userName]="cashierName"
+    [role]="'CASHIER'"
+    [sidebarOpen]="sidebarOpen"
+    (sidebarClose)="closeSidebar()">
+  </app-sidebar>
+
+  <!-- ⭐ Main Content Area -->
+  <main class="main-area" (click)="closeSidebar()">
+
+    <header class="top-bar">
+
+      <!-- ⭐ Hamburger Button -->
+      <button class="menu-btn" (click)="toggleSidebar()">☰</button>
+
+      <div>
+        <h1>{{ headerTitle }}</h1>
+        <p class="subtitle">Quick cashier workflow for daily billing.</p>
+      </div>
+
+    </header>
+
+    <section class="content-panel">
+      <router-outlet></router-outlet>
+    </section>
+
+  </main>
+
+</div>

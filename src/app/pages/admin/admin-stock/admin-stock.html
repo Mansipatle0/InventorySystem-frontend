@@ -1,0 +1,138 @@
+<div class="section-header">
+  <div>
+    <h2>Stock Management & Alerts</h2>
+    <p class="section-desc">
+      Monitor stock levels, identify low stock items and perform stock
+      adjustments / audits.
+    </p>
+  </div>
+
+  <div class="actions">
+    <button class="btn-light" (click)="onStockInClick()">
+      Stock In (Purchase)
+    </button>
+    <button
+      class="btn-light"
+      [class.active]="adjustmentMode"
+      (click)="onStockAdjustmentClick()"
+    >
+      Stock Adjustment / Audit
+    </button>
+  </div>
+</div>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Product</th>
+        <th class="num">
+          @if (adjustmentMode) {
+            New Stock
+          } @else {
+            Current Stock
+          }
+        </th>
+        <th class="num">
+          @if (adjustmentMode) {
+            New Min. Stock
+          } @else {
+            Min. Stock
+          }
+        </th>
+        <th>Status</th>
+        @if (adjustmentMode) {
+          <th class="num">Actions</th>
+        }
+      </tr>
+    </thead>
+
+    <tbody>
+      @if (loading) {
+        <tr>
+          <td colspan="6" class="num">Loading stock...</td>
+        </tr>
+      } @else if (!rows.length) {
+        <tr>
+          <td colspan="6">No stock data found.</td>
+        </tr>
+      } @else {
+        @for (row of rows; track row.id) {
+          <tr>
+            <td>{{ row.code }}</td>
+            <td>{{ row.name }}</td>
+
+            <!-- Current / Adjusted Stock -->
+            <td class="num">
+              @if (adjustmentMode) {
+                <input
+                  type="number"
+                  [(ngModel)]="row.adjustedStock"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="stock-input"
+                />
+              } @else {
+                {{ row.currentStock }}
+              }
+            </td>
+
+            <!-- Current / Adjusted Min Stock -->
+            <td class="num">
+              @if (adjustmentMode) {
+                <input
+                  type="number"
+                  [(ngModel)]="row.adjustedMinStock"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="stock-input"
+                />
+              } @else {
+                {{ row.minStock }}
+              }
+            </td>
+
+            <!-- Status based on current stock vs min stock -->
+            <td>
+              <span
+                class="status-pill"
+                [class.low]="row.currentStock < row.minStock"
+              >
+                {{
+                  row.currentStock < row.minStock ? 'LOW STOCK' : 'OK'
+                }}
+              </span>
+            </td>
+
+            <!-- Actions only in adjustment mode -->
+            @if (adjustmentMode) {
+              <td class="num">
+                @if (row.saved) {
+                  <!-- AFTER SAVE -->
+                  <button class="link-btn saved-btn" disabled>
+                    ✓ Saved
+                  </button>
+                } @else {
+                  <!-- BEFORE SAVE -->
+                  <button class="link-btn" (click)="saveAdjustment(row)">
+                    Save
+                  </button>
+                }
+
+                <!-- RESET button (always visible) -->
+                <button class="link-btn" (click)="cancelAdjustment(row)">
+                  Reset
+                </button>
+              </td>
+            }
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</div>
+
+<p class="hint">
+  Stock levels are loaded from the products table (<code>current_stock</code>
+  and <code>min_stock_level</code>). In <strong>Stock Adjustment / Audit</strong>
+  mode, you can edit both current stock and minimum stock and save per product.
+</p>

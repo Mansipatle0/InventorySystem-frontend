@@ -1,0 +1,60 @@
+<div class="page-wrapper">
+  <header class="page-header">
+    <div>
+      <h2>Recall Held Bill</h2>
+      <p>Select a held bill and send it back to POS.</p>
+    </div>
+  </header>
+
+  <section class="filters">
+    <label>
+      Search bill
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Bill no. or customer name"
+      />
+    </label>
+  </section>
+
+ <section class="table-wrapper">
+  @if (loading) {
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Loading held bills...</p>
+    </div>
+  } @else if (filteredBills.length) {
+    <table>
+      <thead>
+        <tr>
+          <th>Bill No.</th>
+          <th>Customer</th>
+          <th>Total</th>
+          <th>Held At</th>
+          <th style="width: 120px;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (bill of filteredBills; track bill.id) {
+          <tr>
+            <td>{{ bill.holdCode }}</td>
+            <td>{{ bill.customerName || 'Walk-in Customer' }}</td>
+            <td>₹ {{ bill.estimatedTotal }}</td>
+            <td>{{ bill.createdAt | date: 'short' }}</td>
+            <td>
+              <button class="btn-primary" (click)="recallToPos(bill)">
+                Recall in POS
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+    <div class="empty">
+      No held bills available to recall.
+    </div>
+  }
+</section>
+
+</div>

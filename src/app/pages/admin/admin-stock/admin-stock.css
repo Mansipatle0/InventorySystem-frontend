@@ -1,0 +1,76 @@
+/* Admin Stock css*/
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-light {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+ background: #151a3e;
+  color: #e5e7eb;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.saved-pill {
+  color: #0ea20e;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 2px 6px;
+}
+
+
+.table-wrapper {
+  border-radius: 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: #e4e5e9;
+  overflow: hidden;
+  margin-top: 0.75rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+th,
+td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+thead {
+ background: #151a3e;
+}
+
+th {
+  text-align: left;
+  font-weight: 600;
+  color: whitesmoke;
+}
+
+th.num,
+td.num {
+  text-align: right;
+}
+
+.status-pill {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.1);
+  color: #0dcb52;
+}
+
+.status-pill.low {
+  background: rgba(248, 113, 113, 0.1);
+  color: #ea3030e1;
+}
+
+.hint {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}

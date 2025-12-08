@@ -1,0 +1,65 @@
+<div class="page-wrapper">
+  <header class="page-header">
+    <div>
+      <h2>Hold Bill</h2>
+      <p>Temporarily save a customer bill and continue later.</p>
+    </div>
+
+    <button class="btn-primary" (click)="holdCurrentCart()">
+      Hold Current Cart
+    </button>
+  </header>
+
+  <section class="filters">
+    <label>
+      Search by bill no. or customer
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="HB-1001, customer name..."
+      />
+    </label>
+  </section>
+
+  <section class="table-wrapper">
+    <table *ngIf="filteredBills.length; else noData">
+      <thead>
+        <tr>
+          <th>Bill No.</th>
+          <th>Customer</th>
+          <th>Items</th>
+          <th>Total</th>
+          <th>Held At</th>
+          <th style="width: 120px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bill of filteredBills">
+                <td>{{ bill.holdCode }}</td>
+          <td>{{ bill.customerName || 'Walk-in Customer' }}</td>
+          <td>{{ bill.itemsCount }}</td>
+          <td>{{ bill.estimatedTotal | currency: 'INR' }}</td>
+          <td>{{ bill.createdAt | date: 'short' }}</td>
+          <td>
+            <button class="btn-small secondary" (click)="recallHeldBill(bill)">
+              Recall in POS
+            </button>
+            <button
+              class="btn-small danger"
+              (click)="deleteHeldBill(bill)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noData>
+      <div class="empty">
+        No held bills yet. Use <strong>Hold Current Cart</strong> to save one.
+      </div>
+    </ng-template>
+  </section>
+</div>
+      

@@ -1,0 +1,163 @@
+<div class="section-header">
+  <div>
+    <h2>Users & Role Management</h2>
+    <p class="section-desc">Create, edit and disable user accounts for Admin, Cashier and Viewer.</p>
+  </div>
+  <button class="btn-primary" (click)="onAddUserClick()">+ Add User</button>
+</div>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Password</th>
+        <th>Status</th>
+        <th class="num">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <!-- ADD USER ROW -->
+      @if (showAddRow) {
+        <tr class="add-row">
+          <td><input type="text" [(ngModel)]="newUser.name" placeholder="Full name" /></td>
+          <td><input type="email" [(ngModel)]="newUser.email" placeholder="user@example.com" /></td>
+          <td>
+            <select [(ngModel)]="newUser.role">
+              @for (r of roles; track r) { <option [ngValue]="r">{{ r }}</option> }
+            </select>
+          </td>
+
+          <td>
+            <div class="password-wrapper">
+              <input type="password" [(ngModel)]="newUser.password" placeholder="Password" />
+            </div>
+          </td>
+
+          <td>
+            <label>
+              <input type="checkbox" [(ngModel)]="newUser.active" /> Active
+            </label>
+          </td>
+
+          <td class="num">
+            <button class="link-btn" (click)="onSaveNewUser()">Save</button>
+            <button class="link-btn" (click)="onCancelAdd()">Cancel</button>
+          </td>
+        </tr>
+      }
+
+      <!-- EXISTING USERS -->
+      @for (row of rows; track row.id) {
+        <tr>
+
+          <!-- NAME -->
+          <td>
+            @if (editingUserId === row.id) {
+              <input type="text" [(ngModel)]="editModel!.name" />
+            } @else {
+              {{ row.name }}
+            }
+          </td>
+
+          <!-- EMAIL -->
+          <td>
+            @if (editingUserId === row.id) {
+              <input type="email" [(ngModel)]="editModel!.email" />
+            } @else {
+              {{ row.email }}
+            }
+          </td>
+
+          <!-- ROLE -->
+          <td>
+            @if (editingUserId === row.id) {
+              <select [(ngModel)]="editModel!.role">
+                @for (r of roles; track r) { <option [ngValue]="r">{{ r }}</option> }
+              </select>
+            } @else {
+              {{ row.role }}
+            }
+          </td>
+
+        <!-- PASSWORD COLUMN -->
+<td>
+  @if (editingUserId === row.id) {
+
+    <!-- NOT changing password -->
+    @if (!passwordEditMode[row.id]) {
+      <span>******</span>
+      <button class="mini-btn" (click)="togglePasswordChange(row.id)">
+        Change
+      </button>
+    }
+
+    <!-- CHANGE PASSWORD MODE -->
+    @if (passwordEditMode[row.id]) {
+
+      <!-- SHOW EXISTING DB PASSWORD MASKED -->
+      <div class="existing-pass">
+        <strong>Current:</strong>
+        {{ getMaskedPassword(row.password) }}
+      </div>
+
+      <!-- NEW PASSWORD INPUT -->
+      <div class="password-wrapper">
+        <input
+          [type]="passwordVisibility[row.id] ? 'text' : 'password'"
+          [(ngModel)]="editModel!.password"
+          placeholder="Enter new password"
+        />
+
+        <button
+          type="button"
+          class="eye-btn"
+          (click)="togglePasswordVisibility(row.id)"
+        >
+          {{ passwordVisibility[row.id] ? '🙈' : '👁' }}
+        </button>
+      </div>
+
+      <button class="mini-btn danger" (click)="togglePasswordChange(row.id)">
+        Cancel Change
+      </button>
+
+    }
+
+  } @else {
+    ****** <!-- normal view -->
+  }
+</td>
+
+          <!-- STATUS -->
+          <td>
+            <span class="status-pill" [class.disabled]="!isActiveRow(row)">
+              {{ getStatusLabel(row) }}
+            </span>
+          </td>
+
+          <!-- ACTIONS -->
+          <td class="num">
+            @if (editingUserId === row.id) {
+              <button class="link-btn" (click)="onSaveEdit()">
+                {{ savedForRow ? "Saved" : "Save" }}
+              </button>
+              <button class="link-btn" (click)="onCancelEdit()">Cancel</button>
+            } @else {
+              <button class="link-btn" (click)="onEdit(row)">Edit</button>
+              <button class="link-btn" (click)="onToggleStatus(row)">
+                {{ getToggleLabel(row) }}
+              </button>
+            }
+          </td>
+
+        </tr>
+      }
+
+    </tbody>
+  </table>
+</div>

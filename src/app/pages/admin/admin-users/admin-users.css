@@ -1,0 +1,214 @@
+/* ------------------------------- */
+/* TABLE BASE STYLING              */
+/* ------------------------------- */
+
+.table-wrapper {
+  border-radius: 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: #e4e5e9;
+  overflow: hidden;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  min-width: 650px;  /* ⭐ Prevent squeezing on mobile */
+}
+
+th,
+td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+thead {
+  background: #151a3e;
+}
+
+th {
+  text-align: left;
+  font-weight: 600;
+  color: whitesmoke;
+}
+
+th.num,
+td.num {
+  text-align: right;
+}
+
+/* ------------------------------- */
+/* STATUS PILL                     */
+/* ------------------------------- */
+
+.status-pill {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: #bbf7d0;
+  color: #166534;
+}
+
+.status-pill.disabled {
+  background: #fecaca;
+  color: #b91c1c;
+}
+
+/* ------------------------------- */
+/* BUTTONS                         */
+/* ------------------------------- */
+
+.link-btn {
+  border: none;
+  background: transparent;
+  color: #1c82f6;
+  font-size: 0.78rem;
+  cursor: pointer;
+  margin-left: 0.3rem;
+}
+
+.mini-btn {
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  color: #4338ca;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.mini-btn:hover {
+  background: #e0e7ff;
+  border-color: #a5b4fc;
+}
+
+.mini-btn.danger {
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.mini-btn.danger:hover {
+  background: #fecaca;
+  border-color: #fca5a5;
+}
+
+.eye-btn {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #374151;
+  transition: 0.2s ease;
+}
+
+.eye-btn:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.password-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.existing-pass {
+  background: #f9fafb;
+  padding: 4px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 0.8rem;
+  color: #374151;
+}
+
+.add-row input,
+.add-row select {
+  width: 100%;
+  padding: 4px 6px;
+  font-size: 0.85rem;
+}
+
+/* ------------------------------- */
+/* RESPONSIVE FIXES (IMPORTANT)    */
+/* ------------------------------- */
+
+/* ⭐ Mobile + Tablet scroll */
+@media (max-width: 900px) {
+
+  /* Make table scrollable */
+  .table-wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    min-width: 600px; /* must be less than wrapper width for scroll */
+  }
+
+  /* Scrollbar style */
+  .table-wrapper::-webkit-scrollbar {
+    height: 6px;
+  }
+  .table-wrapper::-webkit-scrollbar-track {
+    background: #d1d5db;
+  }
+  .table-wrapper::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 10px;
+  }
+
+  /* Reduce padding */
+  th, td {
+    padding: 0.5rem 0.55rem;
+  }
+
+  /* Mini buttons shrink naturally */
+  .mini-btn,
+  .mini-btn.danger {
+    padding: 2px 8px;
+    font-size: 0.72rem;
+  }
+
+  .eye-btn {
+    padding: 3px 6px;
+    font-size: 0.82rem;
+  }
+
+  /* Status pill smaller */
+  .status-pill {
+    padding: 2px 8px;
+    font-size: 0.72rem;
+  }
+}
+
+/* ⭐ Small phones */
+@media (max-width: 480px) {
+
+  table {
+    min-width: 500px;
+  }
+
+  th, td {
+    font-size: 0.75rem;
+  }
+
+  .mini-btn,
+  .mini-btn.danger {
+    font-size: 0.7rem;
+  }
+
+  .status-pill {
+    font-size: 0.7rem;
+    padding: 2px 7px;
+  }
+
+  .eye-btn {
+    font-size: 0.8rem;
+  }
+}

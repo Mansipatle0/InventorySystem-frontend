@@ -1,0 +1,56 @@
+<div class="page-wrapper">
+  <header class="page-header">
+    <div>
+      <h2>Show / Print Invoice</h2>
+      <p>Search invoices and reprint customer copies.</p>
+    </div>
+  </header>
+
+  <section class="filters">
+    <label>
+      Search invoice
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Invoice no. or customer name"
+       
+      />
+    </label>
+  </section>
+
+  <section class="table-wrapper">
+    <table *ngIf="filteredInvoices.length; else noData">
+      <thead>
+        <tr>
+          <th>Invoice No.</th>
+          <th>Date</th>
+          <th>Customer</th>
+          <th>Payment</th>
+          <th>Total</th>
+          <th style="width: 150px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let inv of filteredInvoices">
+          <td>{{ inv.id }}</td>
+          <td>{{ inv.date | date: 'short' }}</td>
+          <td>{{ inv.customerName }}</td>
+          <td>{{ inv.paymentMode }}</td>
+          <td>₹ {{ inv.totalAmount }}</td>
+          <td>
+            <button class="btn-small" (click)="viewInvoice(inv)">View</button>
+            <button class="btn-small primary" (click)="printInvoice(inv)">
+              Print
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noData>
+      <div class="empty">
+        No invoices found. Try different search text.
+      </div>
+    </ng-template>
+  </section>
+</div>

@@ -1,0 +1,80 @@
+<!-- src/app/reports/monthly-sales-report.component.html -->
+<div class="monthly-wrapper">
+  <div class="top-row">
+    <div>
+      <h2>Monthly Sales Report</h2>
+      <p class="subtitle">
+        Track monthly revenue trends and compare performance over the year.
+      </p>
+    </div>
+
+    <div class="year-filter">
+      <label>Year</label>
+<select [ngModel]="selectedYear" (ngModelChange)="onYearChange($event)">
+
+
+  @for (y of yearsList; track y) {
+    <option [ngValue]="y">{{ y }}</option>
+  }
+</select>
+
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="label">Total Year Revenue</span>
+      <strong class="value">₹ {{ totalYearRevenue | number : '1.0-2' }}</strong>
+    </div>
+    <div class="stat-card">
+      <span class="label">Best Month</span>
+      <strong class="value">{{ bestMonth }}</strong>
+    </div>
+    <div class="stat-card">
+      <span class="label">Avg Monthly Revenue</span>
+      <strong class="value">
+        ₹ {{ avgMonthlyRevenue | number : '1.0-2' }}
+      </strong>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th class="num">Bills</th>
+          <th class="num">Items Sold</th>
+          <th class="num">Revenue (₹)</th>
+          <th class="num">Growth %</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (rows.length === 0) {
+          <tr>
+            <td colspan="5" class="empty-state">
+              No data for selected year.
+            </td>
+          </tr>
+        } @else {
+          @for (row of rows; track row.month) {
+            <tr>
+              <td>{{ row.month }}</td>
+              <td class="num">{{ row.bills }}</td>
+              <td class="num">{{ row.itemsSold }}</td>
+              <td class="num">{{ row.revenue | number : '1.0-2' }}</td>
+              <td
+                class="num"
+              [class.pos]="(row.growthPercent ?? 0) > 0"
+              [class.neg]="(row.growthPercent ?? 0) < 0"
+
+              >
+                {{ row.growthPercent | number : '1.1-1' }}%
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

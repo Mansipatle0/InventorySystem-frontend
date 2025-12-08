@@ -1,0 +1,87 @@
+<!-- fast-slow-movers.html -->
+<div class="fs-wrapper">
+  <div class="head">
+    <h2>Fast / Slow Moving Products</h2>
+    <p class="subtitle">
+      Identify top selling and slow-moving items to optimize purchasing and stock.
+    </p>
+  </div>
+
+  <div class="grids">
+    <div class="panel">
+      <h3>⚡ Fast Movers</h3>
+      <p class="hint">Products with consistently high sales volume.</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Product</th>
+              <th>Category</th>
+              <th class="num">Qty Sold</th>
+              <th class="num">Revenue (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (fastMovers.length === 0) {
+              <tr>
+                <td colspan="5" class="empty-state">
+                  No fast movers for selected period.
+                </td>
+              </tr>
+            } @else {
+              @for (row of fastMovers; track row.code) {
+                <tr>
+                  <td>{{ row.code }}</td>
+                  <td>{{ row.name }}</td>
+                  <td>{{ row.category }}</td>
+                  <td class="num">{{ row.qtySold }}</td>
+                  <td class="num">{{ row.revenue | number : '1.0-2' }}</td>
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>🐢 Slow Movers</h3>
+      <p class="hint">Products with very low sales, blocking shelf space.</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Product</th>
+              <th>Category</th>
+              <th class="num">Qty Sold</th>
+              <th class="num">Revenue (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (slowMovers.length === 0) {
+              <tr>
+                <td colspan="5" class="empty-state">
+                  No slow movers for selected period.
+                </td>
+              </tr>
+            } @else {
+              @for (row of slowMovers; track row.code) {
+                <tr>
+                  <td>{{ row.code }}</td>
+                  <td>{{ row.name }}</td>
+                  <td>{{ row.category }}</td>
+                  <td class="num">{{ row.qtySold }}</td>
+                  <td class="num">{{ row.revenue | number : '1.0-2' }}</td>
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="admin-shell">
+
+
+  <app-sidebar
+    [userName]="adminName"
+    [role]="'ADMIN'"
+    [sidebarOpen]="sidebarOpen"
+    (sidebarClose)="closeSidebar()">
+  </app-sidebar>
+
+  <!-- ⭐ MAIN CONTENT -->
+  <main class="main-area">
+
+    <header class="top-bar">
+
+      <!-- HAMBURGER BUTTON -->
+      <button class="menu-btn" (click)="toggleSidebar()">☰</button>
+
+      <div>
+        <h1>{{ headerTitle }}</h1>
+        <p class="subtitle">
+          Admin controls for products, stock, users and reports.
+        </p>
+      </div>
+    </header>
+
+    <section class="content-panel">
+      <router-outlet></router-outlet>
+    </section>
+
+  </main>
+
+</div>

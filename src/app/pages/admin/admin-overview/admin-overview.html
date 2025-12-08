@@ -1,0 +1,75 @@
+<!-- src/app/pages/admin/admin-overview/admin-overview.html -->
+<div class="overview-wrapper">
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <span class="label">Total Products</span>
+      <strong class="value">{{ totalProducts }}</strong>
+      <span class="hint">Count from product master.</span>
+    </div>
+
+    <div class="kpi-card">
+      <span class="label">Low Stock Items</span>
+      <strong class="value">{{ lowStockItems }}</strong>
+      <span class="hint">Below defined threshold.</span>
+    </div>
+
+    <div class="kpi-card">
+      <span class="label">Active Users</span>
+      <strong class="value">{{ activeUsers }}</strong>
+      <span class="hint">Currently logged-in users.</span>
+    </div>
+
+    <div class="kpi-card">
+      <span class="label">Today’s Sales</span>
+      <strong class="value">₹ {{ todaySales | number : '1.0-2' }}</strong>
+      <span class="hint">Daily summary from reports.</span>
+    </div>
+  </div>
+
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h3>Products & Catalog</h3>
+      <p>Manage product list, add/edit products, bulk import via Excel.</p>
+      <ul>
+        <li>Product Master</li>
+        <li>Add / Edit / Deactivate</li>
+        <li>Bulk Import Products</li>
+      </ul>
+    </div>
+
+    <div class="flow-card">
+      <h3>Stock & Purchases</h3>
+      <p>Control stock levels, purchase entries and stock audits.</p>
+      <ul>
+        <li>Stock In (Purchases)</li>
+        <li>Stock Adjustment / Audit</li>
+        <li>Low Stock Alerts</li>
+      </ul>
+    </div>
+
+    <div class="flow-card">
+      <h3>Users & Roles</h3>
+      <p>Define roles for Admin, Cashier, Viewer with access control.</p>
+      <ul>
+        <li>Create / disable users</li>
+        <li>Assign roles & permissions</li>
+        <li>Password reset (optional)</li>
+      </ul>
+    </div>
+
+    <div class="flow-card">
+      <h3>Reports & Settings</h3>
+      <p>High level reporting and core configuration for your store.</p>
+      <ul>
+        <li>Sales & stock reports</li>
+        <li>Invoice / tax settings</li>
+        <li>Store profile & branding</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="note">
+    This overview matches your SmartInventory flow diagram: Admin Dashboard in
+    the centre connecting products, stock, users and reports.
+  </p>
+</div>

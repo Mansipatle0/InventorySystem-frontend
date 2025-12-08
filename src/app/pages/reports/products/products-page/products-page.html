@@ -1,0 +1,72 @@
+<!-- src/app/products-page/products-page.component.html -->
+<div class="products-report-wrapper">
+  <div class="header-row">
+    <div>
+      <h2>Product-wise Sales History</h2>
+      <p class="subtitle">
+        Analyze sales per product using filters like name, barcode and
+        category.
+      </p>
+    </div>
+  </div>
+
+  <div class="filters-row">
+    <div class="filter-item">
+      <label>Search (code / name)</label>
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Type barcode or product name..."
+      />
+    </div>
+
+    <div class="filter-item">
+      <label>Category</label>
+      <select [(ngModel)]="categoryFilter">
+        @for (cat of categories; track cat) {
+          <option [ngValue]="cat">{{ cat }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="summary-chip">
+      <span>Total Products:</span>
+      <strong>{{ filteredRows.length }}</strong>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Product Name</th>
+          <th>Category</th>
+          <th class="num">Qty Sold</th>
+          <th class="num">Revenue (₹)</th>
+          <th>Last Sold On</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (filteredRows.length === 0) {
+          <tr>
+            <td colspan="6" class="empty-state">
+              No matching products found. Try changing filters.
+            </td>
+          </tr>
+        } @else {
+          @for (row of filteredRows; track row.code) {
+            <tr>
+              <td>{{ row.code }}</td>
+              <td>{{ row.name }}</td>
+              <td>{{ row.category }}</td>
+              <td class="num">{{ row.totalQtySold }}</td>
+              <td class="num">{{ row.totalRevenue | number : '1.0-2' }}</td>
+              <td>{{ row.lastSoldOn }}</td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

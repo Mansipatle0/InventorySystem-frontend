@@ -1,0 +1,43 @@
+.reports-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 🔵 Toolbar container */
+.reports-toolbar {
+  display: flex;
+  gap: 10px;
+
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  overflow-x: auto;
+}
+
+/* 🔵 Each tab button */
+.reports-toolbar .tab {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #cbd5e1;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: 0.25s;
+  white-space: nowrap;
+}
+
+/* Hover effect */
+.reports-toolbar .tab:hover {
+  background: #334155;
+}
+
+/* Active tab */
+.tab.active {
+  background: #4f46e5;
+  color: white;
+  border-color: #6366f1;
+  font-weight: 600;
+  box-shadow: 0 0 8px rgba(99,102,241,0.5);
+}

@@ -1,0 +1,74 @@
+<div class="viewer-shell">
+
+
+  <app-sidebar
+    [userName]="viewerName"
+    [role]="'VIEWER'"
+    [sidebarOpen]="sidebarOpen"
+    (sidebarClose)="closeSidebar()">
+  </app-sidebar>
+
+
+  <main
+    class="main-area"
+
+    (click)="closeSidebar()">
+
+    <header class="top-bar">
+
+
+      <button class="menu-btn" (click)="toggleSidebar()">☰</button>
+
+      <div>
+        <h1>{{ headerTitle }}</h1>
+        <p class="subtitle">
+          Read-only analytics for shop owners & managers.
+        </p>
+      </div>
+
+    </header>
+
+    <section class="content-panel">
+
+      @if (isOverviewRoute) {
+
+        <div class="cards-grid">
+
+          <div class="report-card" (click)="goTo('daily')">
+            <h3>Daily Sales</h3>
+            <p>Today's revenue, bills and avg basket value.</p>
+          </div>
+
+          <div class="report-card" (click)="goTo('product')">
+            <h3>Product-wise History</h3>
+            <p>Barcode, category & item-level history.</p>
+          </div>
+
+          <div class="report-card" (click)="goTo('monthly')">
+            <h3>Monthly Sales</h3>
+            <p>Compare revenue trends month-over-month.</p>
+          </div>
+
+          <div class="report-card" (click)="goTo('fast-slow')">
+            <h3>Fast / Slow Movers</h3>
+            <p>Top & low performing products.</p>
+          </div>
+
+          <div class="report-card" (click)="goTo('export')">
+            <h3>Yearly Export</h3>
+            <p>Export all data to Excel.</p>
+          </div>
+
+        </div>
+
+      } @else {
+
+        <router-outlet></router-outlet>
+
+      }
+
+    </section>
+
+  </main>
+
+</div>

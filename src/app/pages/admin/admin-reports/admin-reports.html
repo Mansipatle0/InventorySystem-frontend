@@ -1,0 +1,14 @@
+
+
+  <!-- 🔥 TOP NAVIGATION TOOLBAR -->
+  <div class="reports-toolbar">
+    <button class="tab" (click)="go('daily')"    [class.active]="active==='daily'">Daily</button>
+    <button class="tab" (click)="go('product')"  [class.active]="active==='product'">Product-wise</button>
+    <button class="tab" (click)="go('monthly')"  [class.active]="active==='monthly'">Monthly</button>
+    <button class="tab" (click)="go('fast-slow')" [class.active]="active==='fast-slow'">Fast / Slow</button>
+    <button class="tab" (click)="go('export')"   [class.active]="active==='export'">Yearly Export</button>
+  </div>
+
+  <!-- Load selected report page -->
+  <router-outlet></router-outlet>
+

@@ -1,0 +1,79 @@
+<div class="daily-wrapper">
+  <div class="top-row">
+    <div>
+      <h2>Daily Sales Report</h2>
+      <p class="subtitle">
+        View today’s total revenue, bills, quantity sold and average basket value.
+      </p>
+    </div>
+
+    <div class="date-filter">
+      <label for="date">Select date</label>
+     <input
+  id="date"
+  type="date"
+  [ngModel]="selectedDate"
+  (ngModelChange)="onDateChange($event)"
+/>
+
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="label">Total Revenue</span>
+      <strong class="value">₹ {{ totalRevenue | number : '1.0-2' }}</strong>
+    </div>
+
+    <div class="stat-card">
+      <span class="label">Total Bills</span>
+      <strong class="value">{{ totalBills }}</strong>
+    </div>
+
+    <div class="stat-card">
+      <span class="label">Items Sold</span>
+      <strong class="value">{{ totalItems }}</strong>
+    </div>
+
+    <div class="stat-card">
+      <span class="label">Avg Basket Value</span>
+      <strong class="value">₹ {{ avgBasketValue | number : '1.0-2' }}</strong>
+    </div>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Bill No.</th>
+          <th>Time</th>
+          <th class="num">Items</th>
+          <th class="num">Amount (₹)</th>
+          <th>Cashier</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @if (rows.length === 0) {
+          <tr>
+            <td colspan="5" class="empty-state">
+              No bills found for selected date.
+            </td>
+          </tr>
+        } @else {
+          @for (row of rows; track row.billNo) {
+            <tr>
+              <td>{{ row.billNo }}</td>
+              <td>{{ row.time }}</td>
+              <td class="num">{{ row.items }}</td>
+              <td class="num">{{ row.amount | number : '1.0-2' }}</td>
+              <td>{{ row.cashier }}</td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

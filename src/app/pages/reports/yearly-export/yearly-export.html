@@ -1,0 +1,66 @@
+<div class="export-wrapper">
+  <div class="top-row">
+    <div>
+      <h2>Yearly Export (Excel)</h2>
+      <p class="subtitle">
+        Export summarized sales data for finance, audit and accounting teams.
+      </p>
+    </div>
+
+    <div class="controls">
+      <div class="field">
+        <label>Year</label>
+        <select [(ngModel)]="selectedYear" (ngModelChange)="onYearChange()">
+          @for (y of yearsList; track y) {
+            <option [ngValue]="y">{{ y }}</option>
+          }
+        </select>
+      </div>
+
+      <button class="btn" type="button" (click)="onPreview()">
+        Preview Summary
+      </button>
+
+      <button
+        class="btn primary"
+        type="button"
+        [disabled]="isExporting"
+        (click)="onExport()"
+      >
+        @if (isExporting) {
+          Exporting...
+        } @else {
+          Download Excel
+        }
+      </button>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th class="num">Bills</th>
+          <th class="num">Revenue (₹)</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (row of rows; track row.month) {
+          <tr>
+            <td>{{ row.month }}</td>
+            <td class="num">{{ row.bills }}</td>
+            <td class="num">{{ row.revenue | number : '1.0-2' }}</td>
+          </tr>
+        }
+
+        <tr class="total-row">
+          <td>Total</td>
+          <td class="num">–</td>
+          <td class="num">{{ totalRevenue | number : '1.0-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

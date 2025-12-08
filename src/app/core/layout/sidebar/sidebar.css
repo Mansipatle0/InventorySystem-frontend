@@ -1,0 +1,162 @@
+
+
+.sidebar {
+  background: #020617;
+  border-right: 1px solid #111827;
+  padding: 18px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  height: 100vh;
+  overflow-y: auto;
+  transition: transform 0.3s ease-in-out;
+
+}
+
+
+/* BACKDROP OVERLAY */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+
+
+  z-index: 1000;
+  display: none;
+}
+
+.sidebar-backdrop.show {
+  display: block;
+}
+
+/* LOGO AREA */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.logo-area h2 {
+  margin: 0;
+  color: white;
+  font-size: 1.05rem;
+}
+
+.role-badge {
+  font-size: 0.75rem;
+  margin: 0;
+  color: #f1efef;
+}
+
+/* USER INFO */
+.user-info {
+  padding: 10px;
+  border-radius: 12px;
+  background: #020617;
+  border: 1px solid #1f2937;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.user-info .hello {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.user-info .name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: whitesmoke
+}
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-item {
+  padding: 9px 10px;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-item.active {
+  background: #1f2937;
+}
+
+.logout-btn {
+  margin-top: auto;
+  background: #020617;
+  color: white;
+  border-radius: 10px;
+  padding: 8px;
+  border: 1px solid #4b5563;
+
+}
+
+.nav-item:hover {
+  background: #111827;
+  transform: translateY(-1px);
+}
+
+.nav-item.active {
+  background: radial-gradient(circle at top left, #4f46e5, #111827);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.8);
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+  margin-top: auto;
+  border: 1px solid #4b5563;
+  border-radius: 999px;
+  background: #020617;
+  color: #e5e7eb;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.logout-btn:hover {
+  background: #111827;
+  border-color: #f97373;
+}
+/* DESKTOP MODE (Sidebar Always Visible) */
+@media (min-width: 901px) {
+  .sidebar {
+    transform: translateX(0) !important;
+  }
+}
+
+/* MOBILE MODE (Sidebar Slide Drawer) */
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1100;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}
+
