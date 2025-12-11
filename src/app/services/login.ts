@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class Login {
-    private API_URL = 'http://localhost:8080/api/auth/login';
+    private API_URL = 'https://inventorysystem-backend-de9k.onrender.com/api/auth/login';
 
   constructor(private http: HttpClient) {}
 
